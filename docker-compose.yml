@@ -3,22 +3,16 @@ networks:
   jenkins:
 
 volumes:
-  jenkins-docker-certs:
-  jenkins-data:
-
-# secrets:
-#   jenkins-user:
-#     file: jenkins/jenkins-user.txt
-#   jenkins-password:
-#     file: jenkins/jenkins-password.txt
+  docker-certs:
+  data:
 
 services:
   docker:
     image: docker:dind
     privileged: true
     volumes:
-      - jenkins-docker-certs:/certs/client
-      - jenkins-data:/var/jenkins_home
+      - docker-certs:/certs/client
+      - data:/var/jenkins_home
     ports:
       - "2376:2376"
     environment:
@@ -48,6 +42,6 @@ services:
       jenkins: {}
 
     volumes:
-      - jenkins-data:/var/jenkins_home
-      - jenkins-docker-certs:/certs:ro
+      - data:/var/jenkins_home
+      - docker-certs:/certs:ro
       - ./jenkins/secrets.properties:/run/secrets/secrets.properties
