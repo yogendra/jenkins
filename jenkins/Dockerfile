@@ -10,4 +10,4 @@ VOLUME /var/jenkins_conf
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 COPY jenkins.yaml /var/jenkins_conf/jenkins.yaml
 RUN install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
-
+VOLUME /run/secrets/secrets.properties
