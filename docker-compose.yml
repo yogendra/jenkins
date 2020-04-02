@@ -1,0 +1,54 @@
+version: "3"
+networks:
+  jenkins:
+
+volumes:
+  jenkins-docker-certs:
+  jenkins-data:
+
+# secrets:
+#   jenkins-user:
+#     file: jenkins/jenkins-user.txt
+#   jenkins-password:
+#     file: jenkins/jenkins-password.txt
+
+services:
+  docker:
+    image: docker:dind
+    privileged: true
+    volumes:
+      - jenkins-docker-certs:/certs/client
+      - jenkins-data:/var/jenkins_home
+    ports:
+      - "2376:2376"
+    environment:
+      DOCKER_TLS_CERTDIR: /certs
+    networks:
+      jenkins:
+        aliases:
+          - docker
+  jenkins:
+    build:
+      context: ./jenkins
+    depends_on:
+      - docker
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    env_file: .env
+    environment:
+      DOCKER_HOST: "tcp://docker:2376"
+      DOCKER_CERT_PATH: "/certs/client"
+      DOCKER_TLS_VERIFY: "1"
+
+    # secrets:
+    #   - jenkins-user
+    #   - jenkins-password
+    networks:
+      jenkins: {}
+
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - jenkins-docker-certs:/certs:ro
+      - ./jenkins/jenkins.yaml:/var/jenkins_conf/jenkins.yaml
+      - ./jenkins/secrets.properties:/run/secrets/secrets.properties
