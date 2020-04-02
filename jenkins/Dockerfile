@@ -1,4 +1,4 @@
-FROM jenkinsci/blueocean as base
+FROM jenkins/jenkins as base
 ENV JAVA_OPTS "-Djenkins.install.runSetupWizard=false ${JAVA_OPTS:-}"
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
