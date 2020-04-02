@@ -105,7 +105,7 @@ unclassified:
     useExistingAccountWithSameEmail: false
   location:
     adminAddress: "${secrets-admin-name} <${secrets-admin-email}>"
-    url: "${secrets-location-url}"
+    url: "${secrets-location}"
   mailer:
     charset: "UTF-8"
     useSsl: false
@@ -116,13 +116,3 @@ tool:
     installations:
       - home: "git"
         name: "Default"
-jobs:
-  - script: >
-      multibranchPipelineJob('configuration-as-code') {
-          branchSources {
-              git {
-                  id = 'configuration-as-code'
-                  remote('https://github.com/jenkinsci/configuration-as-code-plugin.git')
-              }
-          }
-      }
