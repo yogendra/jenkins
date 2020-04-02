@@ -44,4 +44,5 @@ services:
     volumes:
       - data:/var/jenkins_home
       - docker-certs:/certs:ro
-      - ./jenkins/secrets.properties:/run/secrets/secrets.properties
+      - secrets.properties:/run/secrets/secrets.properties
+      - jobs.yaml:/var/jenkins_conf/jobs.yaml
