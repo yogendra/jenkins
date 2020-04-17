@@ -2,7 +2,7 @@
 
 All set Jenkins in one command.
 
-Just create a `jenkins/secrets.properties` file (similar to [secrets-sample.properties](secrets-sample.properties) in this repo)
+Just create a `secrets.properties` file (similar to [secrets-sample.properties](secrets-sample.properties) in this repo)
 
 ```
 docker-compose up -d
