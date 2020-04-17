@@ -42,4 +42,4 @@ services:
       - data:/var/jenkins_home
       - docker-certs:/certs:ro
       - ./secrets.properties:/run/secrets/secrets.properties
-      - ./jobs.yaml:/var/jenkins_conf/jobs.yaml
+      - ./jenkins/jobs.yaml:/var/jenkins_conf/jobs.yaml
