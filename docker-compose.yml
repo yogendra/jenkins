@@ -35,14 +35,11 @@ services:
       DOCKER_CERT_PATH: "/certs/client"
       DOCKER_TLS_VERIFY: "1"
 
-    # secrets:
-    #   - jenkins-user
-    #   - jenkins-password
     networks:
       jenkins: {}
 
     volumes:
       - data:/var/jenkins_home
       - docker-certs:/certs:ro
-      - secrets.properties:/run/secrets/secrets.properties
-      - jobs.yaml:/var/jenkins_conf/jobs.yaml
+      - ./secrets.properties:/run/secrets/secrets.properties
+      - ./jobs.yaml:/var/jenkins_conf/jobs.yaml
